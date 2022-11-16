@@ -125,8 +125,10 @@ table {
 
 button,
 input,
-form {
+form,
+p {
   margin: 0;
   padding: 0;
   border: none;
+  box-sizing: border-box;
 }
