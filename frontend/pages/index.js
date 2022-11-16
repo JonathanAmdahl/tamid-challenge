@@ -5,7 +5,7 @@ import { CopyToClipboard } from "react-copy-to-clipboard";
 import Particles from "../components/particles";
 import styles from "../styles/Home.module.scss";
 
-const base = "http://localhost:3333";
+const base = "https://jonathan-amdahl.com";
 
 export default function Home() {
   const [input, setInput] = useState("");
@@ -14,22 +14,16 @@ export default function Home() {
 
   function handleSubmit(e) {
     e.preventDefault();
-    console.log(`/api/short`);
+    const params = new URLSearchParams();
+    params.append("origUrl", input);
     axios
-      .post(
-        `${base}/api/short`,
-        { origUrl: input },
-        {
-          headers: {
-            "access-control-allow-origin": "*",
-          },
-        }
-      )
+      .post(`${base}/api/short`, params)
       .then((data) => {
-        console.log(data);
+        setShort(data.data);
       })
       .catch((err) => {
         console.error(err.toJSON());
+        setError(true);
       });
   }
 

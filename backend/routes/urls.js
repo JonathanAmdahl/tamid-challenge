@@ -21,8 +21,7 @@ router.post("/short", async (req, res) => {
     try {
       let url = await repo.findOneBy({ longLink: origUrl });
       if (url) {
-        const shortUrl = `${base}/l/${url.shortLink}`;
-        res.json(shortUrl);
+        res.json(url.shortLink);
       } else {
         const shortUrl = `${base}/l/${urlId}`;
 
@@ -34,7 +33,7 @@ router.post("/short", async (req, res) => {
         repo.save(url).then(() => {
           console.log(`URL saved - ${shortUrl} (${origUrl})`);
         });
-        res.json(shortUrl);
+        res.json(urlId);
       }
     } catch (err) {
       console.log(err);
