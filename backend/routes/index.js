@@ -4,6 +4,8 @@ import dataSource from "../functions/dataSource.js";
 const router = express.Router();
 
 router.get("/:urlId", async (req, res) => {
+  res.set("Access-Control-Allow-Origin", "*");
+
   const repo = dataSource.getRepository(Link);
 
   try {

@@ -1,3 +1,4 @@
+import cors from "cors";
 import express from "express";
 import "reflect-metadata";
 import dataSource from "./functions/dataSource.js";
@@ -11,6 +12,24 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use("/api", urlsRouter);
 app.use("/l", indexRouter);
+app.use(
+  cors({
+    origin: "http://localhost:3000",
+  })
+);
+app.use((req, res, next) => {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header(
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content-Type, Accept, Authorization"
+  );
+  if (req.method == "OPTIONS") {
+    res.header("Access-Control-Allow-Methods", "PUT, POST, PATCH, DELETE, GET");
+    return res.status(200).json({});
+  }
+
+  next();
+});
 
 // Server Setup
 const PORT = 3333;

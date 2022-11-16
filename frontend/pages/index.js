@@ -1,14 +1,37 @@
+import axios from "axios";
 import Image from "next/image";
 import { useState } from "react";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import Particles from "../components/particles";
 import styles from "../styles/Home.module.scss";
 
+const base = "http://localhost:3333";
+
 export default function Home() {
   const [input, setInput] = useState("");
   const [short, setShort] = useState("");
+  const [isError, setError] = useState(false);
 
-  function handleSubmit() {}
+  function handleSubmit(e) {
+    e.preventDefault();
+    console.log(`/api/short`);
+    axios
+      .post(
+        `${base}/api/short`,
+        { origUrl: input },
+        {
+          headers: {
+            "access-control-allow-origin": "*",
+          },
+        }
+      )
+      .then((data) => {
+        console.log(data);
+      })
+      .catch((err) => {
+        console.error(err.toJSON());
+      });
+  }
 
   return (
     <div className={styles.home}>

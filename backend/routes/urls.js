@@ -10,6 +10,8 @@ const router = express.Router();
 
 // Short URL Generator
 router.post("/short", async (req, res) => {
+  res.set("Access-Control-Allow-Origin", "*");
+
   const repo = dataSource.getRepository(Link);
   const { origUrl } = req.body;
   const base = "localhost:3000";
@@ -19,7 +21,8 @@ router.post("/short", async (req, res) => {
     try {
       let url = await repo.findOneBy({ longLink: origUrl });
       if (url) {
-        res.json(url.shortLink);
+        const shortUrl = `${base}/l/${url.shortLink}`;
+        res.json(shortUrl);
       } else {
         const shortUrl = `${base}/l/${urlId}`;
 
