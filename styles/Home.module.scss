@@ -8,6 +8,12 @@
   align-items: center;
   justify-content: center;
 
+  .tamid {
+    position: absolute;
+    top: 2rem;
+    left: 2rem;
+  }
+
   * {
     z-index: 10;
     color: white;
@@ -56,6 +62,7 @@
       color: #fff;
       background: #45b4e9;
       height: 100%;
+      font-size: 24px;
       padding: 0.5rem 1rem;
       border-radius: 0 25px 25px 0;
     }
@@ -81,6 +88,7 @@
 
     button {
       padding: 0.5rem 1rem;
+      font-size: 20px;
       height: 100%;
       background: #45b4e9;
       border-radius: 0 25px 25px 0;
