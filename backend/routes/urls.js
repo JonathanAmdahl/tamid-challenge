@@ -8,6 +8,10 @@ dotenv.config({ path: "../env" });
 
 const router = express.Router();
 
+//given url/api/short
+//check if link has id, if so give them that link
+//if not, make a link and give them that
+
 // Short URL Generator
 router.post("/short", async (req, res) => {
   res.set("Access-Control-Allow-Origin", "*");

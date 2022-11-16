@@ -1,5 +1,6 @@
 import { EntitySchema } from "typeorm";
 
+//make a database table
 export default new EntitySchema({
   name: "Link",
   tableName: "link",

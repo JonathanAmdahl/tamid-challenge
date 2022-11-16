@@ -1,6 +1,5 @@
 import axios from "axios";
 import Image from "next/image";
-import { useRouter } from "next/router";
 import { useState } from "react";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import Particles from "../components/particles";
@@ -9,16 +8,20 @@ import styles from "../styles/Home.module.scss";
 const base = "https://jonathan-amdahl.com";
 
 export default function Home() {
-  const { asPath } = useRouter();
-
+  //dynamic fields need state
   const [input, setInput] = useState("");
   const [short, setShort] = useState("");
   const [isError, setError] = useState(false);
 
+  //handle the user clicking the "shorten" button
   function handleSubmit(e) {
-    e.preventDefault();
+    e.preventDefault(); //make the page not refresh
+
+    //setup parameters for the request to backend
     const params = new URLSearchParams();
     params.append("origUrl", input);
+
+    //ask backend to shorten
     axios
       .post(`${base}/api/short`, params)
       .then((data) => {

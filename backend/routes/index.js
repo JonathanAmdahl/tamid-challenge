@@ -1,8 +1,12 @@
 import express from "express";
 import Link from "../entities/Link.js";
 import dataSource from "../functions/dataSource.js";
+
 const router = express.Router();
 
+//given url/l/:urlId
+//look it up, if we have send them the right way
+//else error
 router.get("/:urlId", async (req, res) => {
   res.set("Access-Control-Allow-Origin", "*");
 
