@@ -17,6 +17,7 @@ const ParticlesContainer = () => {
 
   return (
     <Particles
+      style={{ width: "100vw", height: "100vh" }}
       id="tsparticles"
       init={particlesInit}
       loaded={particlesLoaded}

@@ -4,7 +4,9 @@ import styles from "../styles/Home.module.scss";
 export default function Home() {
   return (
     <div className={styles.home}>
-      <Particles />
+      <div className={styles.background}>
+        <Particles />
+      </div>
       <h1>Tamid URL Shortner</h1>
       <p>
         Create custom short links to easily share with others. Get started for
