@@ -1,5 +1,6 @@
 import axios from "axios";
 import Image from "next/image";
+import { useRouter } from "next/router";
 import { useState } from "react";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import Particles from "../components/particles";
@@ -8,6 +9,8 @@ import styles from "../styles/Home.module.scss";
 const base = "https://jonathan-amdahl.com";
 
 export default function Home() {
+  const { asPath } = useRouter();
+
   const [input, setInput] = useState("");
   const [short, setShort] = useState("");
   const [isError, setError] = useState(false);
@@ -19,7 +22,8 @@ export default function Home() {
     axios
       .post(`${base}/api/short`, params)
       .then((data) => {
-        setShort(data.data);
+        setError(false);
+        setShort(`${base}/l/${data.data}`);
       })
       .catch((err) => {
         console.error(err.toJSON());
@@ -58,6 +62,9 @@ export default function Home() {
         />
         <button>Shorten</button>
       </form>
+      {isError && (
+        <p className={styles.error}>Error. Please enter a valid URL</p>
+      )}
       <div className={styles.linkContainer}>
         <p>{short.length !== 0 ? short : "Shorten a link to start"}</p>
         <CopyToClipboard text={short}>
